@@ -19,12 +19,41 @@ export default function Navbar() {
 
     const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
         e.preventDefault();
-        const element = document.querySelector(href);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            setIsMobileMenuOpen(false);
-        }
+        setIsMobileMenuOpen(false);
+
+        // Small delay to allow menu to close before scrolling
+        setTimeout(() => {
+            const element = document.querySelector(href);
+            if (element) {
+                const navHeight = 80; // Height of the navbar
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        }, 100);
     };
+
+    // Close mobile menu when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const nav = document.querySelector('nav');
+            if (isMobileMenuOpen && nav && !nav.contains(event.target as Node)) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
+        if (isMobileMenuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isMobileMenuOpen]);
 
     return (
         <motion.nav
@@ -32,8 +61,8 @@ export default function Navbar() {
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? 'bg-gray-950/80 backdrop-blur-xl border-b border-white/5'
-                    : 'bg-transparent'
+                ? 'bg-gray-950/80 backdrop-blur-xl border-b border-white/5'
+                : 'bg-transparent'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-6 py-4">
