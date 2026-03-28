@@ -2,6 +2,7 @@
 import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
 import { highlights } from '../lib/constants'
+import { ImageWithFallback } from './common/ImageWithFallback';
 
 
 
@@ -35,6 +36,32 @@ export default function About() {
                         animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
+                        {/* Profile Photo */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                            transition={{ duration: 0.8, delay: 0.3 }}
+                            className="mb-8 flex justify-center md:justify-start"
+                        >
+                            <div className="relative">
+                                {/* Gradient Ring */}
+                                <div className="absolute inset-0 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-400 rounded-full blur-xl opacity-50 animate-pulse" />
+
+                                {/* Photo Container */}
+                                <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-white/10 bg-white/5 backdrop-blur-sm">
+                                    <ImageWithFallback
+                                        src= "https://ik.imagekit.io/xsdxsd/tr:w-600,h-600,fo-face/shadrack%20dp"
+                                        alt="Developer Profile Photo"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+
+                                {/* Decorative Dots */}
+                                <div className="absolute -bottom-2 -right-2 w-6 h-6 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full" />
+                                <div className="absolute -top-2 -left-2 w-4 h-4 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full" />
+                            </div>
+                        </motion.div>
+
                         <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                             I'm a full-stack developer passionate about building{' '}
                             <span className="text-blue-400 font-semibold">

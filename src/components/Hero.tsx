@@ -15,10 +15,10 @@ export default function Hero() {
 
 
     return (
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
             {/* Animated Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-purple-950/20 to-gray-950">
-                <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-purple-950/20 to-gray-950 -z-10">
+                <div className="absolute inset-0 overflow-hidden">
                     {/* Gradient Orbs */}
                     <motion.div
                         animate={{
@@ -30,7 +30,7 @@ export default function Hero() {
                             repeat: Infinity,
                             ease: 'easeInOut',
                         }}
-                        className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl"
+                        className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
                     />
                     <motion.div
                         animate={{
@@ -43,7 +43,7 @@ export default function Hero() {
                             ease: 'easeInOut',
                             delay: 1,
                         }}
-                        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl"
+                        className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"
                     />
                 </div>
 
@@ -52,7 +52,7 @@ export default function Hero() {
             </div>
 
             {/* Content */}
-            <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div className="relative z-10 max-w-5xl mx-auto px-6 text-center py-20">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
